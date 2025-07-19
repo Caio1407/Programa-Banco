@@ -1,24 +1,73 @@
-# Compiled class file
-*.class
+import java.util.Scanner;
 
-# Log file
-*.log
+public class Main {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Digite seu Id: ");
+        String id = sc.nextLine();
 
-# BlueJ files
-*.ctxt
+        double saldo = 2500.0;
 
-# Mobile Tools for Java (J2ME)
-.mtj.tmp/
+        switch (id) {
+            case "01":
+                System.out.println("Login efetuado com sucesso! \nOlá Caio Mendonça !\n");
+                break;
+        }
 
-# Package Files #
-*.jar
-*.war
-*.nar
-*.ear
-*.zip
-*.tar.gz
-*.rar
+        while (id.equals("01")) {
+            System.out.println("Operações disponíveis: \n1.Consulta ao saldo\n2.Transferir valor\n3.Receber valor\n4.Sair\n");
+            int escolha = sc.nextInt();
 
-# virtual machine crash logs, see http://www.java.com/en/download/help/error_hotspot.xml
-hs_err_pid*
-replay_pid*
+            switch (escolha) {
+                case 1:
+                    System.out.println("O valor na conta: " + saldo+"\n");
+                    break;
+
+                case 2:
+                    System.out.println("Escolha um valor para transferir: ");
+                    double valor = sc.nextDouble();
+                    System.out.println("Código de segurança: ");
+                    int codTransferencia = sc.nextInt();
+                    if (codTransferencia == 111) {
+                        if (valor > saldo) {
+                            System.out.println("Transação impossibilitada por falta de saldo!");
+                        } else {
+                            saldo -= valor;
+                            System.out.println("Transação realizada com sucesso!\n");
+                            System.out.println("Novo saldo: " + saldo + "\n");
+                        }
+                    } else{
+                        System.out.println("Código incorreto, transação impossibilitada !");
+                    }
+                    break;
+                case 3:
+                    System.out.println("Valor da transação: ");
+                    double valorRecebimento = sc.nextDouble();
+                    System.out.println("Código de confirmação: ");
+                    int codRecebimento = sc.nextInt();
+                    if (codRecebimento == 000){
+                        System.out.println("Transação aprovada ! \n");
+                        saldo+=valorRecebimento;
+                        System.out.println("Novo saldo: " +saldo+"\n");
+                    }else{
+                        System.out.println("Código inválido! Transação não realizada! ");
+                    }
+                break;
+                case 4:
+                    System.out.println("Encerrando o programa...");
+                    System.exit(0);
+                    break;
+
+                default:
+                    System.out.println("Opção inválida!");
+                    break;
+            }
+        }
+
+        if (!id.equals("01")) {
+            System.out.println("Id inválido!");
+        }
+    }
+
+
+    }
